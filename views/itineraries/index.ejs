@@ -1,0 +1,32 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+  <% if (user) { %>
+    <h2>User Itineraries</h2>
+    <% if (itineraries.length > 0) { %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Itinerary Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% itineraries.forEach(function(itinerary) { %>
+            <tr>
+              <td><%= itinerary.name %></td>
+              <td>
+                <a href="/itinerary/<%= itinerary._id %>" class="btn btn-primary">View Details</a>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    <% } else { %>
+      <p>No itineraries found.</p>
+    <% } %>
+    <a href="/itinerary/new" class="btn btn-success">Create New Itinerary</a>
+  <% } %>
+</div>
+
+<%- include('../partials/footer') %>

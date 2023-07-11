@@ -24,7 +24,7 @@ router.get('/logout', function(req, res){
 });
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Wanderlust' });
+  res.redirect('/itineraries');
 });
 
 module.exports = router;

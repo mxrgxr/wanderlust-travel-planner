@@ -12,7 +12,7 @@ require('./config/database');
 require('./config/passport');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const itinerariesRouter = require('./routes/itineraries')
 
 var app = express();
 
@@ -25,6 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
 app.use(methodOverride('_method'));
 
 app.use(session({
@@ -42,7 +43,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/itineraries', itinerariesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
