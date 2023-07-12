@@ -8,9 +8,9 @@
       </div>
       <div class="mt-3">
         <p>
-            <% if (itinerary.startDate && itinerary.endDate) { %>
+          <% if (itinerary.startDate && itinerary.endDate) { %>
             <%= new Date(itinerary.startDate).toLocaleDateString() %> - <%= new Date(itinerary.endDate).toLocaleDateString() %>
-            <% } %>
+          <% } %>
         </p>
       </div>
     </div>
@@ -18,7 +18,7 @@
   <% if (destinationAdded) { %>
     <div class="row">
       <div class="col-12">
-        <h3>Flight Info</h3>
+        <h3>Flights</h3>
       </div>
     </div>
     <div class="row">
@@ -35,7 +35,7 @@
     <div class="row">
       <div class="col-12">
         <p>No Destinations Yet</p>
-        <button type="button" class="btn btn-primary">Add Destination</button>
+        <a href="/itinerary/<%= itinerary._id %>/destinations" class="btn btn-primary">Add Destination</a>
       </div>
     </div>
   <% } %>

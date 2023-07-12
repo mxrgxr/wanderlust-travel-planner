@@ -1,0 +1,22 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+    <h1>Add Destination</h1>
+    <form action="/itinerary/<%= itinerary._id %>/destinations" method="POST">
+        <div class="mb-3">
+            <label for="city" class="form-label">City</label>
+            <input type="text" class="form-control" id="city" name="city" required>
+        </div>
+        <div class="mb-3">
+            <label for="startDate" class="form-label">Start Date</label>
+            <input type="date" class="form-control" id="startDate" name="startDate">
+        </div>
+        <div class="mb-3">
+            <label for="endDate" class="form-label">End Date</label>
+            <input type="date" class="form-control" id="endDate" name="endDate">
+        </div>
+        <button type="submit" class="btn btn-primary">Create Destination</button>
+    </form>
+</div>
+
+<%- include('../partials/footer') %>

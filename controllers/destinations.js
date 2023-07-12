@@ -1,31 +1,35 @@
 const Itinerary = require('../models/itinerary');
 
 module.exports = {
+    new: renderNewDestinationForm,
     create,
 };
 
-async function create(req, res) {
-  try {
-    const itinerary = await Itinerary.findById(req.params.itineraryId);
+async function renderNewDestinationForm(req, res) {
+    const itinerary = await Itinerary.findById(req.params.id);
     if (!itinerary) {
-      return res.status(404).send('Itinerary not found');
+        return res.redirect('/itineraries');
+    }
+    res.render('destinations/new', { itinerary, title: 'Add Destination to Itinerary' });
+}
+
+async function create(req, res) {
+    const itinerary = await Itinerary.findById(req.params.id);
+    if (!itinerary) {
+        return res.redirect('/itineraries');
     }
 
-    const destinationData = {
-      city: req.body.city,
-      startDate: req.body.startDate,
-      endDate: req.body.endDate,
-      itinerary: itinerary._id,
+    const destination = {
+        city: req.body.city,
+        startDate: req.body.startDate,
+        endDate: req.body.endDate
     };
 
-    const newDestination = new Destination(destinationData);
-    await newDestination.save();
-
-    itinerary.destinations.push(newDestination);
-    await itinerary.save();
-
+    itinerary.destinations.push(destination);
+    try {
+        await itinerary.save();
+    } catch (err) {
+        console.log(err);
+    }
     res.redirect(`/itineraries/${itinerary._id}`);
-  } catch (error) {
-    res.status(500).send(error);
-  }
 }

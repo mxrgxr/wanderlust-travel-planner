@@ -13,7 +13,7 @@ const destinationSchema = new Schema({
         type: Date
     },
     itinerary: { type: Schema.Types.ObjectId, ref: 'Itinerary' },
-})
+});
 
 const itinerarySchema = new Schema({
     name: {
