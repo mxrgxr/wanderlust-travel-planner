@@ -6,17 +6,17 @@
     <% if (itineraries.length > 0) { %>
       <table class="table table-striped">
         <thead>
-          <tr>
-            <th>Itinerary Name</th>
-            <th>Actions</th>
-          </tr>
         </thead>
         <tbody>
           <% itineraries.forEach(function(itinerary) { %>
             <tr>
               <td><%= itinerary.name %></td>
+              <td><% if (itinerary.startDate && itinerary.endDate) { %>
+                <%= new Date(itinerary.startDate).toLocaleDateString() %> - <%= new Date(itinerary.endDate).toLocaleDateString() %>
+              <% } %>
+              </td>
               <td>
-                <a href="/itinerary/<%= itinerary._id %>" class="btn btn-primary">View Details</a>
+                <a href="/itineraries/<%= itinerary._id %>" class="btn btn-primary">View Details</a>
               </td>
             </tr>
           <% }) %>
@@ -25,7 +25,7 @@
     <% } else { %>
       <p>No itineraries found.</p>
     <% } %>
-    <a href="/itinerary/new" class="btn btn-success">Create New Itinerary</a>
+    <a href="/itineraries/new" class="btn btn-success">Create New Itinerary</a>
   <% } %>
 </div>
 
