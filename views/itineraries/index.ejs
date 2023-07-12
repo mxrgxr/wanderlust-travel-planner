@@ -10,10 +10,11 @@
         <tbody>
           <% itineraries.forEach(function(itinerary) { %>
             <tr>
-              <td><%= itinerary.name %></td><% if (itinerary.startDate && itinerary.endDate) { %>
-                <%= new Date(itinerary.startDate).toLocaleDateString() %> - <%= new Date(itinerary.endDate).toLocaleDateString() %>
+              <td><%= itinerary.name %></td>
               <td>
-              <% } %>
+                <% if (itinerary.startDate && itinerary.endDate) { %>
+                  <%= new Date(itinerary.startDate).toLocaleDateString() %> - <%= new Date(itinerary.endDate).toLocaleDateString() %>
+                <% } %>
               </td>
               <td>
                 <a href="/itineraries/<%= itinerary._id %>" class="btn btn-primary">View Details</a>
