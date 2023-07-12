@@ -15,30 +15,29 @@
       </div>
     </div>
   </div>
-  <% if (destinationAdded) { %>
-    <div class="row">
-      <div class="col-12">
-        <h3>Flights</h3>
+  <% if (itinerary.destinations.length > 0) { %>
+    <% itinerary.destinations.forEach(destination => { %>
+      <div class="row">
+        <div class="col-12">
+          <h3><%= destination.city %></h3>
+          <p>Flights:</p>
+          <p>Accommodations:</p>
+          <p>Places:</p>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <h3>Accommodations</h3>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <h3>Places</h3>
-      </div>
-    </div>
+    <% }) %>
   <% } else { %>
     <div class="row">
       <div class="col-12">
         <p>No Destinations Yet</p>
-        <a href="/itinerary/<%= itinerary._id %>/destinations" class="btn btn-primary">Add Destination</a>
       </div>
     </div>
   <% } %>
+  <div class="row">
+    <div class="col-12">
+      <a href="/itinerary/<%= itinerary._id %>/destinations" class="btn btn-primary">Add Destination</a>
+    </div>
+  </div>
 </div>
 
 <%- include('../partials/footer') %>
