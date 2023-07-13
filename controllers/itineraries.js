@@ -4,7 +4,9 @@ module.exports = {
     index,
     show,
     new: newItinerary,
-    create
+    create,
+    render: renderEditItineraryForm,
+    update: updateItinerary
 }
 
 async function index(req, res) {
@@ -26,7 +28,7 @@ async function show(req, res) {
 }
 
 function newItinerary(req, res) {
-    res.render('itineraries/new', { title: 'Create New Itinerary' });
+  res.render('itineraries/new', { itinerary: null, title: 'Create New Itinerary' });
 }
 
 async function create(req, res) {
@@ -41,4 +43,22 @@ const newItinerary = new Itinerary(itineraryData);
 await newItinerary.save();
 
 res.redirect('/itineraries');
+}
+
+async function renderEditItineraryForm(req, res) {
+  try {
+    const itinerary = await Itinerary.findById(req.params.id);
+    res.render('itineraries/new', { itinerary, title: 'Update Itinerary' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching itinerary', error });
+  }
+}
+
+async function updateItinerary(req, res) {
+  try {
+    await Itinerary.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.redirect(`/itineraries/${req.params.id}`);
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating itinerary', error });
+  }
 }
