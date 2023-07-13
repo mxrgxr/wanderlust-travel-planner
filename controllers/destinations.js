@@ -4,7 +4,8 @@ module.exports = {
     new: renderNewDestinationForm,
     create,
     renderEditForm,
-    update: updateDestination
+    update: updateDestination,
+    delete: deleteDestination
 };
 
 async function renderNewDestinationForm(req, res) {
@@ -62,4 +63,22 @@ async function updateDestination(req, res) {
       console.log(err);
     }
     res.redirect(`/itineraries/${itinerary._id}`);
+}
+
+async function deleteDestination(req, res) {
+    try {
+      const itinerary = await Itinerary.findById(req.params.id);
+      const destinationId = req.params.destinationId;
+  
+      if (!itinerary || !destinationId) {
+        return res.redirect('/itineraries');
+      }
+  
+      itinerary.destinations.pull({ _id: destinationId });
+      await itinerary.save();
+      res.redirect(`/itineraries/${itinerary._id}`);
+    } catch (error) {
+      console.error('Error details:', error);
+      res.status(500).json({ message: 'Error deleting destination', error });
+    }
 }
