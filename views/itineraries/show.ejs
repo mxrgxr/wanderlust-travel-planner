@@ -16,6 +16,7 @@
       </div>
     </div>
   </div>
+
   <% if (itinerary.destinations.length > 0) { %>
     <% itinerary.destinations.forEach(destination => { %>
       <div class="row">
@@ -24,6 +25,7 @@
           <p>Flights:</p>
           <p>Accommodations:</p>
           <p>Places:</p>
+          <a href="/itineraries/<%= itinerary._id %>/destinations/<%= destination._id %>/edit" class="btn btn-secondary">Edit Destination</a>
         </div>
       </div>
     <% }) %>
@@ -40,5 +42,6 @@
       <a href="/itineraries/<%= itinerary._id %>/destinations" class="btn btn-primary">Add Destination</a>
     </div>
   </div>
+</div>
 
 <%- include('../partials/footer') %>
