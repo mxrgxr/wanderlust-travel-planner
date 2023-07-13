@@ -20,6 +20,11 @@
     </div>
     <button type="submit" class="btn btn-primary"><%= itinerary ? 'Update Itinerary' : 'Create Itinerary' %></button>
   </form>
+  <% if (itinerary && itinerary._id) { %>
+    <form action="/itineraries/<%= itinerary._id %>?_method=DELETE" method="POST" style="display:inline;">
+      <button type="submit" class="btn btn-danger">Delete Itinerary</button>
+    </form>
+  <% } %>
 </div>
 
 <%- include('../partials/footer') %>

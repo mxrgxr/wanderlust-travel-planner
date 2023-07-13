@@ -6,7 +6,8 @@ module.exports = {
     new: newItinerary,
     create,
     render: renderEditItineraryForm,
-    update: updateItinerary
+    update: updateItinerary,
+    delete: deleteItinerary
 }
 
 async function index(req, res) {
@@ -60,5 +61,14 @@ async function updateItinerary(req, res) {
     res.redirect(`/itineraries/${req.params.id}`);
   } catch (error) {
     res.status(500).json({ message: 'Error updating itinerary', error });
+  }
+}
+
+async function deleteItinerary(req, res) {
+  try {
+    await Itinerary.findByIdAndDelete(req.params.id);
+    res.redirect('/itineraries');
+  } catch (error) {
+    res.status(500).json({ message: 'Error deleting itinerary', error });
   }
 }
