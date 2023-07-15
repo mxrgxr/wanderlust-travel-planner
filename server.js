@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var passport = require('passport');
-
+var {Client} = require('@googlemaps/google-maps-services-js');
 
 require('dotenv').config();
 require('./config/database');
@@ -36,6 +36,10 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
+
+const googleMapsClient = new Client({
+  key: process.env.GOOGLE_PLACES_API,
+});
 
 app.use(passport.initialize());
 app.use(passport.session());

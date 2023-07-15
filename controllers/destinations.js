@@ -6,7 +6,7 @@ module.exports = {
     create,
     renderEditForm,
     update: updateDestination,
-    delete: deleteDestination
+    delete: deleteDestination,
 };
 
 async function renderNewDestinationForm(req, res) {
