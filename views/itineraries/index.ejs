@@ -2,31 +2,27 @@
 
 <div class="container">
   <% if (user) { %>
-    <h2>User Itineraries</h2>
+    <h2>Upcoming Trips</h2>
     <% if (itineraries.length > 0) { %>
-      <table class="table table-striped">
-        <thead>
-        </thead>
-        <tbody>
-          <% itineraries.forEach(function(itinerary) { %>
-            <tr>
-              <td><%= itinerary.name %></td>
-              <td>
-                <% if (itinerary.startDate && itinerary.endDate) { %>
-                  <%= new Date(itinerary.startDate).toLocaleDateString() %> - <%= new Date(itinerary.endDate).toLocaleDateString() %>
-                <% } %>
-              </td>
-              <td>
-                <a href="/itineraries/<%= itinerary._id %>" class="btn btn-primary">View Details</a>
-              </td>
-            </tr>
-          <% }) %>
-        </tbody>
-      </table>
+      <div class="itinerary-list">
+        <% itineraries.forEach(function(itinerary) { %>
+          <div class="itinerary-item">
+            <div class="itinerary-info">
+              <h3><%= itinerary.name %></h3>
+              <% if (itinerary.startDate && itinerary.endDate) { %>
+                <p><%= new Date(itinerary.startDate).toLocaleDateString() %> - <%= new Date(itinerary.endDate).toLocaleDateString() %></p>
+              <% } %>
+            </div>
+            <div class="itinerary-actions">
+              <a href="/itineraries/<%= itinerary._id %>" class="btn btn-primary">VIEW</a>
+            </div>
+          </div>
+        <% }) %>
+      </div>
     <% } else { %>
-      <p>No itineraries found.</p>
+      <p>No trips found.</p>
     <% } %>
-    <a href="/itineraries/new" class="btn btn-success">Create New Itinerary</a>
+    <a href="/itineraries/new" class="btn btn-success">ADD TRIP</a>
   <% } %>
 </div>
 

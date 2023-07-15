@@ -9,22 +9,165 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Quicksand:400,700&display=swap" rel="stylesheet">
   <style>
-    .navbar-custom {
-    background-color: #0A141F;
-  }
-
-  .user-avatar {
+.navbar-custom {
+  background-color: #0A141F;
+}
+.navbar-brand {
+  margin-left: -40px;
+}
+.user-avatar {
     border-radius: 50%;
     border: 2px solid #E4E4E4;
     object-fit: cover;
-  }
-  .navbar-custom .nav-link {
+}
+.navbar-custom .nav-link {
   color: #E4E4E4;
   font-family: 'Raleway', sans-serif;
   font-weight: 700;
   font-size: 24px;
-  }
-  </style>
+}
+.btn {
+  background-color: #E89E5B;
+  color: #0C1926;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  border: none;
+  font-size: 24px;
+}
+.btn:hover{
+  background-color: #C46D1C;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+}
+body, p {
+  font-family: 'Quicksand', sans-serif;
+}
+label{
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+}
+container{
+  margin-bottom: 10px;
+}
+.itinerary-list {
+  display: flex;
+  flex-direction: column;
+}
+.itinerary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #CFD8E1;
+  color: #0A141F;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.itinerary-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.itinerary-actions {
+  display: flex;
+  align-items: center;
+}
+
+.itinerary-header {
+  width: 100vw;
+  background-color: #CFD8E1;
+  color: #0A141F;
+  position: relative;
+  padding: 20px 0;
+  height: 20vh;
+}
+
+.itinerary-name {
+  margin-bottom: 0;
+}
+
+.itinerary-dates {
+  position: absolute;
+  bottom: 0px;
+  left: 20px;
+  text-align: center;
+  font-size: 20px;
+}
+.edit-btn {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 20px;
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.btn.btn-secondary.edit-btn {
+  background-color:#0A141F;
+  color:#E4E4E4;
+  margin-right: 25px;
+  padding: 5px 15px;
+}
+.btn.btn-secondary.edit-btn:hover{
+  background-color:#19324D;
+}
+
+.content-wrapper {
+  margin-top:20px;
+  margin-left: -60px;
+}
+.btn.btn-primary{
+  background-color:#0A141F;
+  color:#E4E4E4;
+}
+.btn.btn-primary:hover{
+  background-color: #19324D;
+}
+.destination-card {
+  margin-left: 10px;
+  display: block;
+  width: 180px;
+  height: 100px;
+  background-color: #CFD8E1;
+  color: #0A141F;
+  text-decoration: none;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  overflow: hidden;
+  font-size:12px;
+}
+
+.card-content {
+  padding: 10px;
+}
+
+.destination-card:hover {
+  background-color: #BCC9D4;
+}
+h2{
+  margin-top: 10px;
+}
+.destination-header {
+  width: 100vw;
+  background-color: #CFD8E1;
+  color: #0A141F;
+  position: relative;
+  padding: 20px 0;
+  height: 20vh;
+}
+</style>
 </head>
 <body>
   <header>

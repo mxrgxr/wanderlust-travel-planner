@@ -2,6 +2,7 @@ const Itinerary = require('../models/itinerary');
 
 module.exports = {
     new: renderNewDestinationForm,
+    show,
     create,
     renderEditForm,
     update: updateDestination,
@@ -14,6 +15,23 @@ async function renderNewDestinationForm(req, res) {
         return res.redirect('/itineraries');
     }
     res.render('destinations/new', { itinerary, title: 'Add Destination to Itinerary' });
+}
+
+async function show(req, res) {
+  try {
+    const itinerary = await Itinerary.findById(req.params.id);
+    if (!itinerary) {
+      return res.status(404).send('Itinerary not found');
+    }
+    const destination = itinerary.destinations.find(dest => dest._id.toString() === req.params.destinationId);
+    if (!destination) {
+      return res.status(404).send('Destination not found');
+    }
+    const destinationAdded = itinerary.destinations.length > 0;
+    res.render('destinations/show', { itinerary, destination, title: destination.city, destinationAdded });
+  } catch (error) {
+    res.status(500).send(error);
+  }
 }
 
 async function create(req, res) {

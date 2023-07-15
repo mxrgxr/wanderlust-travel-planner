@@ -1,0 +1,16 @@
+<%- include('../partials/header') %>
+<div class="destination-header">
+    <div class="header-wrapper">
+      <div class="header-text">
+        <h2 class="destination-name"><%= destination.city %></h2>
+        <h6 class="itinerary-name-destinations"><%= itinerary.name %></h6>
+        <p class="destination-dates">
+          <% if (destination.startDate && destination.endDate) { %>
+            <%= new Date(destination.startDate).toLocaleDateString() %> - <%= new Date(destination.endDate).toLocaleDateString() %>
+          <% } %>
+        </p>
+      </div>
+      <a href="/itineraries/<%= itinerary._id %>/destinations/<%= destination._id %>/edit" class="btn btn-secondary edit-btn">EDIT</a>
+    </div>
+  </div>
+<%- include('../partials/footer') %>
