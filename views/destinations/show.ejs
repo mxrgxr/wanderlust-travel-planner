@@ -13,4 +13,20 @@
       <a href="/itineraries/<%= itinerary._id %>/destinations/<%= destination._id %>/edit" class="btn btn-secondary edit-btn">EDIT</a>
     </div>
   </div>
+  <div class="container">
+    <div class="section">
+      <h3>Flights</h3>
+      <a href="/itineraries/<%= itinerary._id %>/destinations/<%= destination._id %>/flights/new">+ ADD FLIGHT</a>
+    </div>
+  
+    <div class="section">
+      <h3>Hotels</h3>
+      <a href="/itineraries/<%= itinerary._id %>/destinations/<%= destination._id %>/hotels/new">+ ADD HOTEL</a>
+    </div>
+  
+    <div class="section">
+      <h3>Places</h3>
+      <a href="/itineraries/<%= itinerary._id %>/destinations/<%= destination._id %>/places/new">+ ADD PLACE</a>
+    </div>
+  </div>
 <%- include('../partials/footer') %>
