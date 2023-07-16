@@ -27,7 +27,9 @@
           <div class="card-body">
             <h5 class="card-title"><%= hotel.name %></h5>
             <p class="card-text">
-              <%= hotel.address.street %>, <%= hotel.address.city %>, <%= hotel.address.country %>
+              <% if (hotel.address.street) { %><%= hotel.address.street %>, <% } %>
+              <%= hotel.address.city %>, <%= hotel.address.state %>, <%= hotel.address.country %>
+              <% if (hotel.address.postalCode) { %>, <%= hotel.address.postalCode %><% } %>
             </p>
             <% if (hotel.checkIn && hotel.checkOut) { %>
               <p class="card-text" style="font-size: small;">
