@@ -1,32 +1,49 @@
 <%- include('../partials/header') %>
 <div class="destination-header">
-    <div class="header-wrapper">
-      <div class="header-text">
-        <h2 class="destination-name"><%= destination.city %></h2>
-        <h6 class="itinerary-name-destinations"><%= itinerary.name %></h6>
-        <p class="destination-dates">
-          <% if (destination.startDate && destination.endDate) { %>
-            <%= new Date(destination.startDate).toLocaleDateString() %> - <%= new Date(destination.endDate).toLocaleDateString() %>
-          <% } %>
-        </p>
-      </div>
-      <a href="/itineraries/<%= itinerary._id %>/destinations/<%= destination._id %>/edit" class="btn btn-secondary edit-btn">EDIT</a>
+  <div class="header-wrapper">
+    <div class="header-text">
+      <h2 class="destination-name"><%= destination.city %></h2>
+      <h6 class="itinerary-name-destinations"><%= itinerary.name %></h6>
+      <p class="destination-dates">
+        <% if (destination.startDate && destination.endDate) { %>
+          <%= new Date(destination.startDate).toLocaleDateString() %> - <%= new Date(destination.endDate).toLocaleDateString() %>
+        <% } %>
+      </p>
     </div>
+    <a href="/itineraries/<%= itinerary._id %>/destinations/<%= destination._id %>/edit" class="btn btn-secondary edit-btn">EDIT</a>
   </div>
-  <div class="container">
-    <div class="section">
-      <h3>Flights</h3>
-      <a href="/itineraries/<%= itinerary._id %>/destinations/<%= destination._id %>/flights/new" class="add-resource">+ ADD FLIGHT</a>
-    </div>
-  
-    <div class="section">
-      <h3>Hotels</h3>
-      <a href="/itineraries/<%= itinerary._id %>/destinations/<%= destination._id %>/hotels/new" class="add-resource">+ ADD HOTEL</a>
-    </div>
-  
-    <div class="section">
-      <h3>Places</h3>
-      <a href="/itineraries/<%= itinerary._id %>/destinations/<%= destination._id %>/places/new" class="add-resource">+ ADD PLACE</a>
-    </div>
+</div>
+<div class="container">
+  <div class="section">
+    <h3>Flights</h3>
+    <a href="/itineraries/<%= itinerary._id %>/destinations/<%= destination._id %>/flights/new" class="add-resource">+ ADD FLIGHT</a>
   </div>
+
+  <div class="section">
+    <h3>Hotels</h3>
+    <div class="hotel-cards-wrapper" style="display: flex; overflow-x: auto; white-space: nowrap;">
+      <% hotels.forEach(function(hotel) { %>
+        <div class="card" style="flex: 0 0 auto; margin-right: 16px;">
+          <div class="card-body">
+            <h5 class="card-title"><%= hotel.name %></h5>
+            <p class="card-text">
+              <%= hotel.address.street %>, <%= hotel.address.city %>, <%= hotel.address.country %>
+            </p>
+            <% if (hotel.checkIn && hotel.checkOut) { %>
+              <p class="card-text" style="font-size: small;">
+                <%= new Date(hotel.checkIn).toLocaleDateString() %> - <%= new Date(hotel.checkOut).toLocaleDateString() %>
+              </p>
+            <% } %>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+    <a href="/itineraries/<%= itinerary._id %>/destinations/<%= destination._id %>/hotels/new" class="add-resource">+ ADD HOTEL</a>
+  </div>
+
+  <div class="section">
+    <h3>Places</h3>
+    <a href="/itineraries/<%= itinerary._id %>/destinations/<%= destination._id %>/places/new" class="add-resource">+ ADD PLACE</a>
+  </div>
+</div>
 <%- include('../partials/footer') %>

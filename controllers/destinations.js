@@ -1,4 +1,5 @@
 const Itinerary = require('../models/itinerary');
+const Hotel = require('../models/hotel');
 
 module.exports = {
     new: renderNewDestinationForm,
@@ -28,7 +29,10 @@ async function show(req, res) {
       return res.status(404).send('Destination not found');
     }
     const destinationAdded = itinerary.destinations.length > 0;
-    res.render('destinations/show', { itinerary, destination, title: destination.city, destinationAdded });
+
+    const hotels = await Hotel.find({ destination: destination._id });
+
+    res.render('destinations/show', { itinerary, destination, hotels, title: destination.city, destinationAdded });
   } catch (error) {
     res.status(500).send(error);
   }
