@@ -37,13 +37,4 @@ const itinerarySchema = new Schema({
     timestamps: true
 });
 
-itinerarySchema.plugin(mongooseDelete, {
-    overrideMethods: 'all',
-  });
-
-destinationSchema.pre('delete', async function (next) {
-    await Hotel.deleteMany({ destination: this._id });
-  
-    next();
-});
 module.exports = mongoose.model('Itinerary', itinerarySchema);

@@ -45,7 +45,85 @@
 
   <div class="section">
     <h3>Places</h3>
-    <a href="/itineraries/<%= itinerary._id %>/destinations/<%= destination._id %>/places/new" class="add-resource">+ ADD PLACE</a>
+    <div class="place-cards-wrapper" style="display: flex; overflow-x: auto; white-space: nowrap;">
+      <% places.forEach(function(place) { %>
+        <div class="card" style="flex: 0 0 auto; margin-right: 16px;">
+          <div class="card-body">
+            <h5 class="card-title"><%= place.name %></h5>
+            <p class="card-text">
+              <% if (place.address.street) { %><%= place.address.street %>, <% } %>
+              <%= place.address.city %>, <%= place.address.state %>, <%= place.address.country %>
+              <% if (place.address.postalCode) { %>, <%= place.address.postalCode %><% } %>
+            </p>
+            <p class="card-text" style="font-size: small;">
+              <%= place.googlePlaceType.replace(/_/g, ' ').replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase()) %>
+            </p>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+    <a id="addPlaceLink" href="#" class="add-resource">+ ADD PLACE</a>
+    <form id="addPlaceForm" action="/itineraries/<%= itinerary._id %>/destinations/<%= destination._id %>/places" method="POST" style="display: none;">
+      <input type="text" id="placeSearch" placeholder="Search for a place">
+      <input type="hidden" id="placeName" name="name">
+      <input type="hidden" id="street" name="address.street">
+      <input type="hidden" id="city" name="address.city">
+      <input type="hidden" id="state" name="address.state">
+      <input type="hidden" id="country" name="address.country">
+      <input type="hidden" id="postalCode" name="address.postalCode">
+      <input type="hidden" id="googlePlaceType" name="googlePlaceType">
+      <button id="addPlaceButton" style="display: none;">ADD</button>
+    </form>
   </div>
-</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= process.env.GOOGLE_PLACES_API %>&libraries=places"></script>
+<script>
+  function initializePlaceAutocomplete() {
+    const placeSearchInput = document.getElementById('placeSearch');
+    const autocomplete = new google.maps.places.Autocomplete(placeSearchInput, {
+      types: ['establishment'],
+    });
+
+    autocomplete.addListener('place_changed', function () {
+      const place = autocomplete.getPlace();
+      if (!place.geometry || !place.geometry.location) {
+        return;
+      }
+
+      document.getElementById('placeName').value = place.name;
+      setAddressComponents(place);
+      document.getElementById('googlePlaceType').value = place.types[0];
+    });
+  }
+
+  function setAddressComponents(place) {
+    const addressComponents = place.address_components;
+
+    document.getElementById('street').value = getAddressComponent(addressComponents, 'street_number', 'route');
+    document.getElementById('city').value = getAddressComponent(addressComponents, 'locality');
+    document.getElementById('state').value = getAddressComponent(addressComponents, 'administrative_area_level_1');
+    document.getElementById('country').value = getAddressComponent(addressComponents, 'country');
+    document.getElementById('postalCode').value = getAddressComponent(addressComponents, 'postal_code');
+  }
+
+  function getAddressComponent(components, ...types) {
+    const component = components.find(c => c.types.some(t => types.includes(t)));
+    return component ? component.long_name : '';
+  }
+
+  document.getElementById('addPlaceLink').addEventListener('click', function (event) {
+    event.preventDefault();
+    const form = document.getElementById('addPlaceForm');
+    const button = document.getElementById('addPlaceButton');
+    if (form.style.display === 'none') {
+      form.style.display = 'block';
+      button.style.display = 'block';
+    } else {
+      form.style.display = 'none';
+      button.style.display = 'none';
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', initializePlaceAutocomplete);
+</script>
+
 <%- include('../partials/footer') %>

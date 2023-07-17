@@ -1,5 +1,6 @@
 const Itinerary = require('../models/itinerary');
 const Hotel = require('../models/hotel');
+const Place = require('../models/place');
 
 module.exports = {
     new: renderNewDestinationForm,
@@ -32,7 +33,9 @@ async function show(req, res) {
 
     const hotels = await Hotel.find({ destination: destination._id });
 
-    res.render('destinations/show', { itinerary, destination, hotels, title: destination.city, destinationAdded });
+    const places = await Place.find({ destination: destination._id });
+
+    res.render('destinations/show', { itinerary, destination, hotels, title: destination.city, destinationAdded, places});
   } catch (error) {
     res.status(500).send(error);
   }
