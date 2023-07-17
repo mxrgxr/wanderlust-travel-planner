@@ -29,19 +29,12 @@
 function initializeHotelAutocomplete() {
   const hotelNameInput = document.getElementById('hotelName');
   const autocomplete = new google.maps.places.Autocomplete(hotelNameInput, {
-    types: ['establishment'],
+    types: ['lodging'],
   });
   autocomplete.addListener('place_changed', function () {
     const place = autocomplete.getPlace();
     if (!place.geometry || !place.geometry.location) {
       return;
-    }
-
-    if (place.types.includes('lodging')) {
-      setAddressComponents(place);
-      hotelNameInput.value = place.name;
-    } else {
-      alert('Please select a hotel');
     }
   });
 }
