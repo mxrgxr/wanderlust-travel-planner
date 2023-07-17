@@ -92,24 +92,22 @@
       document.getElementById('placeName').value = place.name;
       setAddressComponents(place);
       document.getElementById('googlePlaceType').value = place.types[0];
-    });
-  }
-
-  function setAddressComponents(place) {
-    const addressComponents = place.address_components;
-
-    document.getElementById('street').value = getAddressComponent(addressComponents, 'street_number', 'route');
-    document.getElementById('city').value = getAddressComponent(addressComponents, 'locality');
-    document.getElementById('state').value = getAddressComponent(addressComponents, 'administrative_area_level_1');
-    document.getElementById('country').value = getAddressComponent(addressComponents, 'country');
-    document.getElementById('postalCode').value = getAddressComponent(addressComponents, 'postal_code');
-  }
-
+  });
+}
+function setAddressComponents(place) {
+  const addressComponents = place.address_components;
+  const streetNumber = getAddressComponent(addressComponents, 'street_number');
+  const route = getAddressComponent(addressComponents, 'route');
+  document.getElementById('street').value = streetNumber && route ? `${streetNumber} ${route}` : streetNumber || route;
+  document.getElementById('city').value = getAddressComponent(addressComponents, 'locality');
+  document.getElementById('state').value = getAddressComponent(addressComponents, 'administrative_area_level_1');
+  document.getElementById('country').value = getAddressComponent(addressComponents, 'country');
+  document.getElementById('postalCode').value = getAddressComponent(addressComponents, 'postal_code');
+}
   function getAddressComponent(components, ...types) {
     const component = components.find(c => c.types.some(t => types.includes(t)));
     return component ? component.long_name : '';
   }
-
   document.getElementById('addPlaceLink').addEventListener('click', function (event) {
     event.preventDefault();
     const form = document.getElementById('addPlaceForm');
@@ -122,8 +120,6 @@
       button.style.display = 'none';
     }
   });
-
   document.addEventListener('DOMContentLoaded', initializePlaceAutocomplete);
 </script>
-
 <%- include('../partials/footer') %>

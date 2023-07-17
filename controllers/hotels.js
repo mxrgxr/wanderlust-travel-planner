@@ -22,4 +22,4 @@ async function create(req, res) {
     } catch (err) {
       res.redirect('back');
     }
-  }
+}
