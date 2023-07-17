@@ -26,46 +26,30 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?key=<%= process.env.GOOGLE_PLACES_API %>&libraries=places"></script>
 <script>
-  function initializePlaceAutocomplete() {
-    const placeSearchInput = document.getElementById('placeSearch');
-    const autocomplete = new google.maps.places.Autocomplete(placeSearchInput, {
-      types: ['establishment'],
-    });
-    autocomplete.addListener('place_changed', function () {
-      const place = autocomplete.getPlace();
-      if (!place.geometry || !place.geometry.location) {
-        return;
-      }
-
-      document.getElementById('placeName').value = place.name;
-      setAddressComponents(place);
-      document.getElementById('googlePlaceType').value = place.types[0];
-    });
-  }
-  function setAddressComponents(place) {
-    const addressComponents = place.address_components;
-    document.getElementById('street').value = getAddressComponent(addressComponents, 'street_number', 'route');
-    document.getElementById('city').value = getAddressComponent(addressComponents, 'locality');
-    document.getElementById('state').value = getAddressComponent(addressComponents, 'administrative_area_level_1');
-    document.getElementById('country').value = getAddressComponent(addressComponents, 'country');
-    document.getElementById('postalCode').value = getAddressComponent(addressComponents, 'postal_code');
-  }
-  function getAddressComponent(components, ...types) {
-    const component = components.find(c => c.types.some(t => types.includes(t)));
-    return component ? component.long_name : '';
-  }
-  document.getElementById('addPlaceLink').addEventListener('click', function (event) {
-    event.preventDefault();
-    const form = document.getElementById('addPlaceForm');
-    const button = document.getElementById('addPlaceButton');
-    if (form.style.display === 'none') {
-      form.style.display = 'block';
-      button.style.display = 'block';
-    } else {
-      form.style.display = 'none';
-      button.style.display = 'none';
+function initializeHotelAutocomplete() {
+  const hotelNameInput = document.getElementById('hotelName');
+  const autocomplete = new google.maps.places.Autocomplete(hotelNameInput, {
+    types: ['lodging'],
+  });
+  autocomplete.addListener('place_changed', function () {
+    const place = autocomplete.getPlace();
+    if (!place.geometry || !place.geometry.location) {
+      return;
     }
   });
-  document.addEventListener('DOMContentLoaded', initializePlaceAutocomplete);
+}
+function setAddressComponents(place) {
+  const addressComponents = place.address_components;
+  document.getElementById('street').value = getAddressComponent(addressComponents, 'street_number', 'route');
+  document.getElementById('city').value = getAddressComponent(addressComponents, 'locality');
+  document.getElementById('state').value = getAddressComponent(addressComponents, 'administrative_area_level_1');
+  document.getElementById('country').value = getAddressComponent(addressComponents, 'country');
+  document.getElementById('postalCode').value = getAddressComponent(addressComponents, 'postal_code');
+}
+function getAddressComponent(components, ...types) {
+  const component = components.find(c => c.types.some(t => types.includes(t)));
+  return component ? component.long_name : '';
+}
+document.addEventListener('DOMContentLoaded', initializeHotelAutocomplete);
 </script>
 <%- include('../partials/footer') %>
