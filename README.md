@@ -28,8 +28,8 @@ Visit the deployed website [here](https://wanderlust-travel-planner-7da588a66e9b
 - Integration with 3rd party APIs for travel information
 
 ## Next Steps
-[] Update and delete secondary data resources
-[] Cascade delete instances of flights, hotels, places when parent is deleted
-[] Responsive design
-[] Recommend points of interest
-[] Group planning feature for collaborating on a trip
+[ ] Update and delete secondary data resources
+[ ] Cascade delete instances of flights, hotels, places when parent is deleted
+[ ] Responsive design
+[ ] Recommend points of interest
+[ ] Group planning feature for collaborating on a trip
