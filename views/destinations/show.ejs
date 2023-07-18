@@ -16,6 +16,21 @@
 <div class="container">
   <div class="section">
     <h3>Flights</h3>
+    <div class="flight-cards-wrapper" style="display: flex; overflow-x: auto; white-space: nowrap;">
+      <% flights.forEach(function(flight) { %>
+        <div class="card" style="flex: 0 0 auto; margin-right: 16px;">
+          <div class="card-body">
+            <h5 class="card-title"><%= flight.departure.iataCode %> -> <%= flight.arrival.iataCode %></h5>
+            <p class="card-text">
+              <%= flight.airline.name %> #<%= flight.flightNo %>
+            </p>
+            <p class="card-text">
+              <%= new Date(flight.departure.time).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }) %> <%= new Date(flight.departure.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) %> - <%= new Date(flight.arrival.time).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }) %>
+            </p>
+          </div>
+        </div>
+      <% }) %>
+    </div>
     <a href="/itineraries/<%= itinerary._id %>/destinations/<%= destination._id %>/flights/new" class="add-resource">+ ADD FLIGHT</a>
   </div>
 

@@ -1,0 +1,44 @@
+<%- include('../partials/header') %>
+
+<div class="container">
+  <h1>Add Flight</h1>
+  <form action="/itineraries/<%= itineraryId %>/destinations/<%= destinationId %>/flights" method="POST">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="airline" class="form-label">Airline</label>
+        <input type="text" class="form-control" id="airline" name="airline[name]" required>
+    </div>
+      <div class="col-md-6 mb-3">
+        <label for="flightNo" class="form-label">Flight Number</label>
+        <input type="number" class="form-control" id="flightNo" name="flightNo" min="1" oninput="validity.valid||(value='');" required>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="departureIataCode" class="form-label">Departure Airport Code</label>
+        <input type="text" class="form-control" id="departureIataCode" name="departure[iataCode]" pattern="[A-Za-z]{3}" title="Three letter IATA code" oninput="toUpperCase(this)" required>
+    </div>
+      <div class="col-md-6 mb-3">
+        <label for="arrivalIataCode" class="form-label">Arrival Airport Code</label>
+        <input type="text" class="form-control" id="arrivalIataCode" name="arrival[iataCode]" pattern="[A-Za-z]{3}" title="Three letter IATA code" oninput="toUpperCase(this)" required>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="departureDateTime" class="form-label">Departure</label>
+        <input type="datetime-local" class="form-control" id="departureDateTime" name="departure[time]" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="arrivalDateTime" class="form-label">Arrival</label>
+        <input type="datetime-local" class="form-control" id="arrivalDateTime" name="arrival[time]" required>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">ADD FLIGHT</button>
+  </form>
+</div>
+<script>
+    function toUpperCase(input) {
+      input.value = input.value.toUpperCase();
+    }
+  </script>
+<%- include('../partials/footer') %>

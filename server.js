@@ -15,6 +15,7 @@ require('./config/passport');
 const indexRouter = require('./routes/index');
 const itinerariesRouter = require('./routes/itineraries');
 const destinationsRouter = require('./routes/destinations');
+const flightsRouter = require('./routes/flights');
 
 const hotelsRouter = require('./routes/hotels');
 const placesRouter = require('./routes/places');
@@ -27,7 +28,8 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(methodOverride('_method'));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
 
@@ -52,6 +54,7 @@ app.use('/itineraries', itinerariesRouter);
 app.use('/', destinationsRouter);
 app.use('/', hotelsRouter);
 app.use('/', placesRouter);
+app.use('/', flightsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
