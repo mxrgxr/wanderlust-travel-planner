@@ -7,8 +7,8 @@ Wanderlust is a travel planner app that allows users to create itineraries, add 
 Visit the deployed website [here](https://wanderlust-travel-planner-7da588a66e9b.herokuapp.com/) and check out the feature planning board [here](https://trello.com/b/xA260zwc/project-2).
 
 ## Preview
-![Wireframe](/public/images/destinations-wireframes.png)
-![App screenshot](/public/images/views-destinations-show.png)
+![Wireframe](/images/destinations-wireframes.png)
+![Screenshot](/images/views-destinations-show.png)
 
 ## Technologies Used
 
