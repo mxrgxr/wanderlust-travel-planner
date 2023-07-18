@@ -13,13 +13,13 @@ function renderNewHotelForm(req, res) {
 }
 
 async function create(req, res) {
-    const hotel = new Hotel(req.body);
-    hotel.destination = req.params.destinationId;
-  
-    try {
-      await hotel.save();
-      res.redirect(`/itineraries/${req.params.itineraryId}/destinations/${req.params.destinationId}`);
-    } catch (err) {
-      res.redirect('back');
-    }
+  const hotel = new Hotel(req.body);
+  hotel.destination = req.params.destinationId;
+
+  try {
+    await hotel.save();
+    res.redirect(`/itineraries/${req.params.itineraryId}/destinations/${req.params.destinationId}`);
+  } catch (err) {
+    res.redirect('back');
+  }
 }

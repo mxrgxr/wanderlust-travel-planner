@@ -184,34 +184,28 @@ h2{
 </style>
 </head>
 <body>
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-custom">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/">
-          <img src="/images/wanderlust-logo.svg" alt="Wanderlust" width="250" height="50">
-        </a>
-        <div class="collapse navbar-collapse">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/">Home</a>
-            </li>
-            <% if (user) { %>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="<%= user.avatar %>" alt="" class="user-avatar" width="50" height="50">
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="/logout">Log Out</a></li>
-                </ul>
-              </li>
-            <% } else { %>
-              <li class="nav-item">
-                <a class="nav-link" href="/login">Log In</a>
-              </li>
-            <% } %>
-          </ul>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">
+            <img src="/images/wanderlust-logo.svg" alt="Wanderlust" width="250" height="50">
+          </a>
+          <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="<%= user.avatar %>" alt="" class="user-avatar" width="50" height="50">
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="/logout">Log Out</a></li>
+                  </ul>
+                </li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
-  </header>
+      </nav>
+    </header>
   <main>
